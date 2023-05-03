@@ -1,6 +1,7 @@
 # Laravel Temporal Example
 
 ## Install Dependencies
+
 ```bash
 bash install.sh
 source ~/.bashrc
