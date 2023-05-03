@@ -1,5 +1,10 @@
 # Laravel Temporal Example
 
+## Install Dependencies
+```bash
+bash install.sh
+```
+
 ## Start Temporal
 
 ```bash

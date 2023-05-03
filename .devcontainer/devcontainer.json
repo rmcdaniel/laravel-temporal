@@ -20,8 +20,8 @@
         "CoenraadS.bracket-pair-colorizer"
 	],
 	"remoteUser": "sail",
-	"postCreateCommand": "chown -R 1000:1000 /var/www/html && bash /var/www/html/install.sh",
-	"forwardPorts": [80]
+	"postCreateCommand": "chown -R 1000:1000 /var/www/html",
+	// "forwardPorts": [80]
 	// "runServices": [],
 	// "shutdownAction": "none",
 }
