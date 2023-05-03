@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Workflows\Simple;
 
-use Workflow\Activity;
-
-class SimpleOtherActivity extends Activity
+class SimpleOtherActivity implements SimpleOtherActivityInterface
 {
-    public function execute($string)
+    public function execute(string $string)
     {
         return $string;
     }

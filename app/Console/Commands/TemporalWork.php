@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-// use App\Workflows\SyncEventsWorkflow;
-// use App\Workflows\AggregateEventsActivity;
-// use App\Workflows\CleanupEventsActivity;
-// use App\Workflows\StoreEventsActivity;
+use App\Workflows\Simple\SimpleWorkflow;
+use App\Workflows\Simple\SimpleActivity;
+use App\Workflows\Simple\SimpleOtherActivity;
 use Illuminate\Console\Command;
 use Temporal\WorkerFactory;
 
@@ -43,17 +42,11 @@ class TemporalWork extends Command
     public function handle()
     {
         $factory = WorkerFactory::create();
-
         $worker = $factory->newWorker();
-
-        // $worker->registerWorkflowTypes(SyncEventsWorkflow::class);
-
-        // $worker->registerActivity(AggregateEventsActivity::class);
-        // $worker->registerActivity(StoreEventsActivity::class);
-        // $worker->registerActivity(CleanupEventsActivity::class);
-
+        $worker->registerWorkflowTypes(SimpleWorkflow::class);
+        $worker->registerActivity(SimpleActivity::class);
+        $worker->registerActivity(SimpleOtherActivity::class);
         $factory->run();
-
         return 0;
     }
 }
