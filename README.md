@@ -15,7 +15,7 @@ temporal server start-dev
 ## Start Workers
 
 ```bash
-./rr serve
+rr serve
 ```
 
 ## Start Workflow
