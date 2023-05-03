@@ -21,7 +21,7 @@ rr serve
 ## Start Workflow
 
 ```bash
-php artisan workflow:start
+php artisan workflow:start simple
 ```
 
 ## Monitor Workflow

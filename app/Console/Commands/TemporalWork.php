@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Workflows\Complex\ComplexWorkflow;
+use App\Workflows\Complex\ComplexActivity;
+use App\Workflows\Complex\ComplexOtherActivity;
 use App\Workflows\Simple\SimpleWorkflow;
 use App\Workflows\Simple\SimpleActivity;
 use App\Workflows\Simple\SimpleOtherActivity;
@@ -46,6 +49,9 @@ class TemporalWork extends Command
         $worker->registerWorkflowTypes(SimpleWorkflow::class);
         $worker->registerActivity(SimpleActivity::class);
         $worker->registerActivity(SimpleOtherActivity::class);
+        $worker->registerWorkflowTypes(ComplexWorkflow::class);
+        $worker->registerActivity(ComplexActivity::class);
+        $worker->registerActivity(ComplexOtherActivity::class);
         $factory->run();
         return 0;
     }

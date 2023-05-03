@@ -3,28 +3,26 @@
 namespace App\Console\Commands;
 
 use App\Workflows\Complex\ComplexWorkflowInterface;
-use App\Workflows\Simple\SimpleWorkflowInterface;
-use Exception;
 use Illuminate\Console\Command;
 use Temporal\Client\GRPC\ServiceClient;
 use Temporal\Client\WorkflowClient;
 use Temporal\Client\WorkflowOptions;
 
-class WorkflowStart extends Command
+class WorkflowQuery extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'workflow:start {workflow}';
+    protected $signature = 'workflow:query {method}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new workflow and start it running';
+    protected $description = 'Get data from a workflow';
 
     private WorkflowClient $workflowClient;
 
@@ -47,28 +45,12 @@ class WorkflowStart extends Command
      */
     public function handle()
     {
-        switch ($this->argument('workflow')) {
-            case 'complex':
-                $class = ComplexWorkflowInterface::class;
-                break;
-            case 'simple':
-                $class = SimpleWorkflowInterface::class;
-                break;
-
-            default:
-                throw new Exception('Unknown workflow.');
-                break;
-        }
-
-        $workflow = $this->workflowClient->newWorkflowStub(
-            $class,
-            WorkflowOptions::new()->withWorkflowId($class::WORKFLOW_ID)
-        );
-
         try {
-            $this->workflowClient->start($workflow);
+            $workflow = $this->workflowClient->newRunningWorkflowStub(ComplexWorkflowInterface::class, 'complex-workflow');
+
+            $this->info($workflow->{$this->argument('method')}());
         } catch (\Throwable $th) {
-            $this->info('already running');
+            $this->info('not running');
         }
 
         return 0;
