@@ -11,5 +11,5 @@ use Temporal\Activity\ActivityMethod;
 interface SimpleActivityInterface
 {
     #[ActivityMethod]
-    public function execute();
+    public function simple();
 }

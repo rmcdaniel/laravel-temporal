@@ -6,7 +6,7 @@ namespace App\Workflows\Simple;
 
 class SimpleActivity implements SimpleActivityInterface
 {
-    public function execute()
+    public function simple()
     {
         return 'activity';
     }

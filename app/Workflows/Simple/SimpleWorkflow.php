@@ -29,9 +29,9 @@ class SimpleWorkflow implements SimpleWorkflowInterface
     #[Workflow\WorkflowMethod]
     public function execute()
     {
-        $result = yield $this->simpleActivity->execute();
+        $result = yield $this->simpleActivity->simple();
 
-        $otherResult = yield $this->simpleOtherActivity->execute();
+        $otherResult = yield $this->simpleOtherActivity->other('other_activity');
 
         return 'workflow_' . $result . '_' . $otherResult;
     }
