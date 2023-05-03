@@ -11,5 +11,5 @@ use Temporal\Activity\ActivityMethod;
 interface SimpleOtherActivityInterface
 {
     #[ActivityMethod]
-    public function execute(string $string);
+    public function execute();
 }

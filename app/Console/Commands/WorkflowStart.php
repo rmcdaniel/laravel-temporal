@@ -46,7 +46,7 @@ class WorkflowStart extends Command
     public function handle()
     {
         $workflow = $this->workflowClient->newWorkflowStub(
-            SyncEventsWorkflowInterface::class,
+            SimpleWorkflowInterface::class,
             WorkflowOptions::new()->withWorkflowId(SimpleWorkflowInterface::WORKFLOW_ID)
         );
 

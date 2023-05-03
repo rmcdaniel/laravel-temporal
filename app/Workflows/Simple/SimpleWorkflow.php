@@ -17,11 +17,11 @@ class SimpleWorkflow implements SimpleWorkflowInterface
     public function __construct()
     {
         $this->simpleActivity = Workflow::newActivityStub(
-            AggregateEventsActivityInterface::class,
+            SimpleActivityInterface::class,
             ActivityOptions::new()->withStartToCloseTimeout(CarbonInterval::seconds(5))
         );
         $this->simpleOtherActivity = Workflow::newActivityStub(
-            StoreEventsActivityInterface::class,
+            SimpleOtherActivityInterface::class,
             ActivityOptions::new()->withStartToCloseTimeout(CarbonInterval::seconds(5))
         );
     }
@@ -31,7 +31,7 @@ class SimpleWorkflow implements SimpleWorkflowInterface
     {
         $result = yield $this->simpleActivity->execute();
 
-        $otherResult = yield $this->simpleOtherActivity->execute('other_activity');
+        $otherResult = yield $this->simpleOtherActivity->execute();
 
         return 'workflow_' . $result . '_' . $otherResult;
     }

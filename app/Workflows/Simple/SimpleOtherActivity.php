@@ -6,8 +6,8 @@ namespace App\Workflows\Simple;
 
 class SimpleOtherActivity implements SimpleOtherActivityInterface
 {
-    public function execute(string $string)
+    public function execute()
     {
-        return $string;
+        return 'other_activity';
     }
 }
