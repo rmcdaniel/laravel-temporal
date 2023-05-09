@@ -48,6 +48,7 @@ class WorkflowQuery extends Command
         try {
             $workflow = $this->workflowClient->newRunningWorkflowStub(ComplexWorkflowInterface::class, 'complex-workflow');
 
+            // $workflow->state()
             $this->info($workflow->{$this->argument('method')}());
         } catch (\Throwable $th) {
             $this->info('not running');

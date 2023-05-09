@@ -48,6 +48,7 @@ class WorkflowSignal extends Command
         try {
             $workflow = $this->workflowClient->newRunningWorkflowStub(ComplexWorkflowInterface::class, 'complex-workflow');
 
+            // $workflow->submit()
             $workflow->{$this->argument('method')}();
         } catch (\Throwable $th) {
             $this->info('not running');

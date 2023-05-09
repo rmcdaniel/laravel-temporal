@@ -8,6 +8,10 @@ use App\Workflows\Complex\ComplexOtherActivity;
 use App\Workflows\Simple\SimpleWorkflow;
 use App\Workflows\Simple\SimpleActivity;
 use App\Workflows\Simple\SimpleOtherActivity;
+use App\Workflows\Versioned\VersionedWorkflow;
+use App\Workflows\Versioned\VersionedActivity;
+use App\Workflows\Versioned\VersionedReplacementActivity;
+use App\Workflows\Versioned\VersionedOtherActivity;
 use Illuminate\Console\Command;
 use Temporal\WorkerFactory;
 
@@ -46,12 +50,20 @@ class TemporalWork extends Command
     {
         $factory = WorkerFactory::create();
         $worker = $factory->newWorker();
-        $worker->registerWorkflowTypes(SimpleWorkflow::class);
-        $worker->registerActivity(SimpleActivity::class);
-        $worker->registerActivity(SimpleOtherActivity::class);
+
         $worker->registerWorkflowTypes(ComplexWorkflow::class);
         $worker->registerActivity(ComplexActivity::class);
         $worker->registerActivity(ComplexOtherActivity::class);
+
+        $worker->registerWorkflowTypes(SimpleWorkflow::class);
+        $worker->registerActivity(SimpleActivity::class);
+        $worker->registerActivity(SimpleOtherActivity::class);
+
+        $worker->registerWorkflowTypes(VersionedWorkflow::class);
+        $worker->registerActivity(VersionedActivity::class);
+        $worker->registerActivity(VersionedReplacementActivity::class);
+        $worker->registerActivity(VersionedOtherActivity::class);
+
         $factory->run();
         return 0;
     }

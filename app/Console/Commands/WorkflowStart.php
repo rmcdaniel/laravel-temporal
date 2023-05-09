@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Workflows\Complex\ComplexWorkflowInterface;
 use App\Workflows\Simple\SimpleWorkflowInterface;
+use App\Workflows\Versioned\VersionedWorkflowInterface;
 use Exception;
 use Illuminate\Console\Command;
 use Temporal\Client\GRPC\ServiceClient;
@@ -54,6 +55,9 @@ class WorkflowStart extends Command
             case 'simple':
                 $class = SimpleWorkflowInterface::class;
                 break;
+            case 'versioned':
+                $class = VersionedWorkflowInterface::class;
+                break;
 
             default:
                 throw new Exception('Unknown workflow.');
@@ -62,7 +66,7 @@ class WorkflowStart extends Command
 
         $workflow = $this->workflowClient->newWorkflowStub(
             $class,
-            WorkflowOptions::new()->withWorkflowId($class::WORKFLOW_ID)
+            WorkflowOptions::new()->withWorkflowId($class === VersionedWorkflowInterface::class ? $class::WORKFLOW_ID . random_int(100, 999) : $class::WORKFLOW_ID)
         );
 
         try {
